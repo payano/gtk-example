@@ -15,6 +15,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 FIND_PACKAGE(PkgConfig REQUIRED)
 PKG_CHECK_MODULES(GTK REQUIRED gtkmm-3.0)
 
+INCLUDE_DIRECTORIES(
+	src/gui
+	src/gui/Views
+	/usr/include/
+	/usr/include/gtkmm-3.0/
+	/usr/include/gtk-3.0/
+)
 # Setup CMake to use GTK+, tell the compiler where to look for headers
 # and to the linker where to look for libraries
 INCLUDE_DIRECTORIES(${GTK_INCLUDE_DIRS})
@@ -23,5 +30,9 @@ LINK_DIRECTORIES(${GTK_LIBRARY_DIRS})
 # Add other flags to the compiler
 ADD_DEFINITIONS(${GTK_CFLAGS_OTHER})
 
-add_executable(hello main.cpp)
+add_executable(hello
+	main.cpp
+	src/gui/ViewStarter.cpp
+	src/gui/Views/MainWindow.cpp
+)
 TARGET_LINK_LIBRARIES(hello ${GTK_LIBRARIES})
